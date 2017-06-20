@@ -99,4 +99,6 @@ crashlytics-build.properties
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm
 # ---------------------------------------------------------------------
 activemq-data/
+activemq-data/localhost/
+activemq-data/*
 
