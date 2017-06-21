@@ -1,34 +1,23 @@
-package ru.bellintegrator.model;
+package ru.bellintegrator.view;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 /**
  * Created by MADmitriev on 19.06.2017.
  */
-@Entity
-public class WeatherImage {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column
+public class WeatherImageView implements Serializable {
     private String title;
-    @Column
     private int width;
-    @Column
     private int height;
-    @Column
     private String link;
-    @Column
     private String url;
 
-    @OneToOne(targetEntity = WeatherChannel.class, cascade = CascadeType.ALL, orphanRemoval = true)
-    private WeatherChannel channel;
-
-    public WeatherImage(){
+    public WeatherImageView(){
 
     }
 
-    public WeatherImage(String title, int width, int height, String link, String url){
+    public WeatherImageView(String title, int width, int height, String link, String url){
         this.title = title;
         this.width = width;
         this.height = height;
@@ -74,13 +63,5 @@ public class WeatherImage {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public WeatherChannel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(WeatherChannel channel) {
-        this.channel = channel;
     }
 }

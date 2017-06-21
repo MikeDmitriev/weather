@@ -1,29 +1,21 @@
-package ru.bellintegrator.model;
+package ru.bellintegrator.view;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 /**
  * Created by MADmitriev on 19.06.2017.
  */
-@Entity
-public class WeatherLocation {
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
-   private long id;
-   @Column
+public class WeatherLocationView implements Serializable {
    private String city;
-   @Column
    private String country;
-   @Column
    private String region;
-   @OneToOne(targetEntity = WeatherChannel.class, cascade = CascadeType.ALL, orphanRemoval = true)
-   private WeatherChannel channel;
 
-   public WeatherLocation(){
+   public WeatherLocationView(){
 
    }
 
-   public WeatherLocation(String city, String country, String region){
+   public WeatherLocationView(String city, String country, String region){
       this.city = city;
       this.country = country;
       this.region = region;
@@ -51,13 +43,5 @@ public class WeatherLocation {
 
    public void setRegion(String region) {
       this.region = region;
-   }
-
-   public WeatherChannel getChannel() {
-      return channel;
-   }
-
-   public void setChannel(WeatherChannel channel) {
-      this.channel = channel;
    }
 }

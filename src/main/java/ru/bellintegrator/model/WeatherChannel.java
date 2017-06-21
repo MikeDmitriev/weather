@@ -1,27 +1,48 @@
 package ru.bellintegrator.model;
 
-import javax.persistence.Embeddable;
-import java.io.Serializable;
+import javax.persistence.*;
 
 /**
  * Created by MADmitriev on 19.06.2017.
  */
-@Embeddable
-public class WeatherChannel implements Serializable {
+@Entity
+public class WeatherChannel {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @OneToOne(targetEntity = WeatherUnits.class, cascade = CascadeType.ALL, orphanRemoval = true)
     private WeatherUnits units;
+    @Column
     private String title;
+    @Column
     private String link;
+    @Column
     private String description;
+    @Column
     private String language;
+    @Column
     private String lastBuildDate;
+    @Column
     private int ttl;
+    @OneToOne(targetEntity = WeatherLocation.class, cascade = CascadeType.ALL, orphanRemoval = true)
     private WeatherLocation location;
+    @OneToOne(targetEntity = WeatherWind.class, cascade = CascadeType.ALL, orphanRemoval = true)
     private WeatherWind wind;
+    @OneToOne(targetEntity = WeatherAtmosphere.class, cascade = CascadeType.ALL, orphanRemoval = true)
     private WeatherAtmosphere atmosphere;
+    @OneToOne(targetEntity = WeatherAstronomy.class, cascade = CascadeType.ALL, orphanRemoval = true)
     private WeatherAstronomy astronomy;
+    @OneToOne(targetEntity = WeatherImage.class, cascade = CascadeType.ALL, orphanRemoval = true)
     private WeatherImage image;
+    @OneToOne(targetEntity = WeatherItem.class, cascade = CascadeType.ALL, orphanRemoval = true)
     private WeatherItem item;
+    @OneToOne(targetEntity = WeatherResults.class, cascade = CascadeType.ALL, orphanRemoval = true)
+    private WeatherResults results;
+
+    public WeatherChannel(){
+
+    }
 
     public WeatherUnits getUnits() {
         return units;
@@ -125,5 +146,13 @@ public class WeatherChannel implements Serializable {
 
     public void setItem(WeatherItem item) {
         this.item = item;
+    }
+
+    public WeatherResults getResults() {
+        return results;
+    }
+
+    public void setResults(WeatherResults results) {
+        this.results = results;
     }
 }

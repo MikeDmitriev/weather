@@ -5,15 +5,19 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import ru.bellintegrator.dao.WeatherDAO;
+import ru.bellintegrator.mapping.ModelToViewMapper;
 import ru.bellintegrator.model.WeatherModel;
+import ru.bellintegrator.model.WeatherQuery;
 import ru.bellintegrator.service.WeatherService;
 import ru.bellintegrator.view.WeatherView;
+
+import javax.annotation.PostConstruct;
 
 /**
  * Created by MADmitriev on 20.06.2017.
  */
 @Service
-@Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
+//@Scope(value = "session", proxyMode = ScopedProxyMode.INTERFACES)
 public class WeatherServiceImpl implements WeatherService{
 
     private WeatherDAO weatherDAO;
@@ -24,9 +28,21 @@ public class WeatherServiceImpl implements WeatherService{
         this.weatherDAO = weatherDAO;
     }
 
+//    @PostConstruct
+//    private void init() {
+//        WeatherModel model = new WeatherModel();
+//        model.setCity("penza");
+//        model.setQuery(new WeatherQuery());
+//
+//        weatherDAO.create(model);
+//    }
+
     @Override
     public WeatherView getWeather(String city){
-        return new WeatherView(weatherDAO.getById(city));
+        ModelToViewMapper modelToViewMapper = new ModelToViewMapper();
+        WeatherModel model = weatherDAO.getById(city);
+        WeatherView weatherView = modelToViewMapper.mapModel(model);
+        return weatherView;
     }
 
     @Override

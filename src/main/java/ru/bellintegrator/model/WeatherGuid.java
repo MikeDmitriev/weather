@@ -1,17 +1,26 @@
 package ru.bellintegrator.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import javax.persistence.Embeddable;
-import java.io.Serializable;
+import javax.persistence.*;
 
 /**
  * Created by MADmitriev on 20.06.2017.
  */
-@Embeddable
-public class WeatherGuid implements Serializable {
-    @JsonProperty("isPermaLink")
+@Entity
+public class WeatherGuid {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column
     private boolean isPermaLink;
+    @OneToOne(targetEntity = WeatherItem.class, cascade = CascadeType.ALL, orphanRemoval = true)
+    private WeatherItem item;
+
+    public WeatherGuid(){
+
+    }
+    public WeatherGuid(boolean isPermaLink){
+        this.isPermaLink = isPermaLink;
+    }
 
     public boolean isPermaLink() {
         return isPermaLink;
@@ -19,5 +28,13 @@ public class WeatherGuid implements Serializable {
 
     public void setPermaLink(boolean isPermaLink) {
         this.isPermaLink = isPermaLink;
+    }
+
+    public WeatherItem getItem() {
+        return item;
+    }
+
+    public void setItem(WeatherItem item) {
+        this.item = item;
     }
 }

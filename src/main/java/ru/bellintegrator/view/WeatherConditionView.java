@@ -1,31 +1,22 @@
-package ru.bellintegrator.model;
+package ru.bellintegrator.view;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 /**
  * Created by MADmitriev on 20.06.2017.
  */
-@Entity
-public class WeatherCondition {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column
+public class WeatherConditionView implements Serializable {
     private int code;
-    @Column
     private String date;
-    @Column
     private int temp;
-    @Column
     private String text;
-    @OneToOne(targetEntity = WeatherItem.class, cascade = CascadeType.ALL, orphanRemoval = true)
-    private WeatherItem item;
 
-    public WeatherCondition(){
+    public WeatherConditionView(){
 
     }
 
-    public WeatherCondition(int code, String date, int temp, String text){
+    public WeatherConditionView(int code, String date, int temp, String text){
         this.code = code;
         this.date = date;
         this.temp = temp;
@@ -62,13 +53,5 @@ public class WeatherCondition {
 
     public void setText(String text) {
         this.text = text;
-    }
-
-    public WeatherItem getItem() {
-        return item;
-    }
-
-    public void setItem(WeatherItem item) {
-        this.item = item;
     }
 }

@@ -1,29 +1,21 @@
-package ru.bellintegrator.model;
+package ru.bellintegrator.view;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 /**
  * Created by MADmitriev on 19.06.2017.
  */
-@Entity
-public class WeatherWind {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column
+public class WeatherWindView implements Serializable {
     private int chill;
-    @Column
     private int direction;
-    @Column
     private int speed;
-    @OneToOne(targetEntity = WeatherChannel.class, cascade = CascadeType.ALL, orphanRemoval = true)
-    private WeatherChannel channel;
 
-    public WeatherWind(){
+    public WeatherWindView(){
 
     }
 
-    public WeatherWind(int chill, int direction, int speed){
+    public WeatherWindView(int chill, int direction, int speed){
         this.chill = chill;
         this.direction = direction;
         this.speed = speed;
@@ -51,13 +43,5 @@ public class WeatherWind {
 
     public void setSpeed(int speed) {
         this.speed = speed;
-    }
-
-    public WeatherChannel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(WeatherChannel channel) {
-        this.channel = channel;
     }
 }

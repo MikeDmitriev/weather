@@ -1,18 +1,30 @@
 package ru.bellintegrator.model;
 
-import javax.persistence.Embeddable;
-import java.io.Serializable;
+import javax.persistence.*;
 
 /**
  * Created by MADmitriev on 19.06.2017.
  */
-@Embeddable
-public class WeatherQuery implements Serializable {
+@Entity
+public class WeatherQuery {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column
     private int count;
+    @Column
     private String created;
+    @Column
     private String lang;
+    @OneToOne(targetEntity = WeatherResults.class, cascade = CascadeType.ALL, orphanRemoval = true)
     private WeatherResults results;
+    @OneToOne(targetEntity = WeatherModel.class, cascade = CascadeType.ALL, orphanRemoval = true)
+    private WeatherModel model;
+
+    public WeatherQuery(){
+
+    }
 
     public int getCount() {
         return count;
@@ -44,5 +56,13 @@ public class WeatherQuery implements Serializable {
 
     public void setResults(WeatherResults results) {
         this.results = results;
+    }
+
+    public WeatherModel getModel() {
+        return model;
+    }
+
+    public void setModel(WeatherModel model) {
+        this.model = model;
     }
 }

@@ -1,30 +1,21 @@
-package ru.bellintegrator.model;
+package ru.bellintegrator.view;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 /**
  * Created by MADmitriev on 19.06.2017.
  */
-@Entity
-public class WeatherAtmosphere {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column
+public class WeatherAtmosphereView implements Serializable {
     private int humidity;
-    @Column
     private double pressure;
-    @Column
     private int rising;
-    @Column
     private double visibility;
-    @OneToOne(targetEntity = WeatherChannel.class, cascade = CascadeType.ALL, orphanRemoval = true)
-    private WeatherChannel channel;
 
-    public WeatherAtmosphere(){
+    public WeatherAtmosphereView(){
 
     }
-    public WeatherAtmosphere(int humidity, double pressure, int rising, double visibility){
+    public WeatherAtmosphereView(int humidity, double pressure, int rising, double visibility){
         this.humidity = humidity;
         this.pressure = pressure;
         this.rising = rising;
@@ -61,13 +52,5 @@ public class WeatherAtmosphere {
 
     public void setVisibility(double visibility) {
         this.visibility = visibility;
-    }
-
-    public WeatherChannel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(WeatherChannel channel) {
-        this.channel = channel;
     }
 }

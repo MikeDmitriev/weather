@@ -40,19 +40,6 @@ public class ReceiverConfig {
         return factory;
     }
 
-//    @Bean
-//    public Topic topic(ActiveMQConnectionFactory activeMQConnectionFactory) {
-//
-//        try {
-//            Connection connection = activeMQConnectionFactory.createConnection();
-//            Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-//            return session.createTopic("weather");
-//        }catch (JMSException e){
-//            log.info("Exception:", e);
-//        }
-//        return null;
-//    }
-
     @Bean
     public Receiver receiver() {
         return new Receiver();

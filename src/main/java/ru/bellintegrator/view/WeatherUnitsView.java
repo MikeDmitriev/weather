@@ -1,31 +1,22 @@
-package ru.bellintegrator.model;
+package ru.bellintegrator.view;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
+import java.io.Serializable;
 
 /**
  * Created by MADmitriev on 19.06.2017.
  */
-@Entity
-public class WeatherUnits {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column
+public class WeatherUnitsView implements Serializable {
     private String distance;
-    @Column
     private String pressure;
-    @Column
     private String speed;
-    @Column
     private String temperature;
-    @OneToOne(targetEntity = WeatherChannel.class, cascade = CascadeType.ALL, orphanRemoval = true)
-    private WeatherChannel channel;
 
-    public WeatherUnits(){
+    public WeatherUnitsView(){
 
     }
 
-    public WeatherUnits(String distance, String pressure, String speed, String temperature){
+    public WeatherUnitsView(String distance, String pressure, String speed, String temperature){
         this.distance = distance;
         this.pressure = pressure;
         this.speed = speed;
@@ -62,13 +53,5 @@ public class WeatherUnits {
 
     public void setTemperature(String temperature) {
         this.temperature = temperature;
-    }
-
-    public WeatherChannel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(WeatherChannel channel) {
-        this.channel = channel;
     }
 }

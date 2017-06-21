@@ -1,40 +1,29 @@
-package ru.bellintegrator.model;
+package ru.bellintegrator.view;
 
-import javax.persistence.*;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.Embeddable;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by MADmitriev on 20.06.2017.
  */
-@Entity
-public class WeatherItem {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-    @Column
+public class WeatherItemView implements Serializable {
     private String title;
-    @Column
     private double lat;
-    @Column
+    @JsonProperty("long")
     private double someValue;
-    @Column
     private String link;
-    @Column
     private String pubDate;
-    @OneToOne(targetEntity = WeatherCondition.class, cascade = CascadeType.ALL, orphanRemoval = true)
-    private WeatherCondition condition;
-    @OneToMany(mappedBy="id")
-    private List<WeatherForecast> forecast;
-    @Column
+    private WeatherConditionView condition;
+    private List<WeatherForecastView> forecast;
     private String description;
-    @OneToOne(targetEntity = WeatherGuid.class, cascade = CascadeType.ALL, orphanRemoval = true)
-    private WeatherGuid guid;
-    @OneToOne(targetEntity = WeatherChannel.class, cascade = CascadeType.ALL, orphanRemoval = true)
-    private WeatherChannel channel;
+    private WeatherGuidView guid;
 
-    public WeatherItem(){
-        this.forecast = new ArrayList<WeatherForecast>();
+    public WeatherItemView() {
+        this.forecast = new ArrayList<WeatherForecastView>();
     }
 
     public String getTitle() {
@@ -77,44 +66,39 @@ public class WeatherItem {
         this.pubDate = pubDate;
     }
 
-    public WeatherCondition getCondition() {
+    public WeatherConditionView getCondition() {
         return condition;
     }
 
-    public void setCondition(WeatherCondition condition) {
+    public void setCondition(WeatherConditionView condition) {
         this.condition = condition;
     }
 
-    public List<WeatherForecast> getForecast() {
+    public List<WeatherForecastView> getForecast() {
         return forecast;
     }
 
-    public void setForecast(List<WeatherForecast> forecast) {
+    public void setForecast(List<WeatherForecastView> forecast) {
         this.forecast = forecast;
     }
 
     public String getDescription() {
         return description;
-//        String str = "";
-//        this.description.toString(str);
-//        return str;
     }
 
     public void setDescription(String description) {
         this.description = description;
-//        this.description = new TextType();
-//        this.description.fromString(description);
     }
 
-    public WeatherGuid getGuid() {
+    public WeatherGuidView getGuid() {
         return guid;
     }
 
-    public void setGuid(WeatherGuid guid) {
+    public void setGuid(WeatherGuidView guid) {
         this.guid = guid;
     }
 
-    public void addForecast(WeatherForecast forecast){
+    public void addForecast(WeatherForecastView forecast) {
         this.forecast.add(forecast);
     }
 }
