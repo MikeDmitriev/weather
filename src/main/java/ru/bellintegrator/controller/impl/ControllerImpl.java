@@ -1,6 +1,5 @@
 package ru.bellintegrator.controller.impl;
 
-import com.fasterxml.jackson.annotation.JsonValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,12 +30,12 @@ public class ControllerImpl implements Controller {
     }
 
     @Autowired
-    private YahooRequestSender yahooYahooRequestSender;
+    private YahooRequestSender yahooRequestSender;
 
     @Override
     @RequestMapping(value = "/submit", method = RequestMethod.GET)
     public boolean getWeather(@RequestParam String city) {
-        return yahooYahooRequestSender.getWeather(city);
+        return yahooRequestSender.getWeather(city);
     }
 
     @Override

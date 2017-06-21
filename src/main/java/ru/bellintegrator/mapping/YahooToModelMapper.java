@@ -51,7 +51,7 @@ public class YahooToModelMapper {
         WeatherItem weatherItem = new WeatherItem();
 
         weatherItem.setCondition(mapCondition(yahooWeatherItem.getCondition()));
-        weatherItem.setDescription("no description");
+        weatherItem.setDescription(yahooWeatherItem.getDescription());
         weatherItem.setGuid(mapGuid(yahooWeatherItem.getGuid()));
         weatherItem.setLat(yahooWeatherItem.getLat());
         weatherItem.setLink(yahooWeatherItem.getLink());

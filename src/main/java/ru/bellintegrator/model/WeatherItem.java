@@ -26,7 +26,7 @@ public class WeatherItem {
     private WeatherCondition condition;
     @OneToMany(mappedBy="id")
     private List<WeatherForecast> forecast;
-    @Column
+    @Column(length = 1024)
     private String description;
     @OneToOne(targetEntity = WeatherGuid.class, cascade = CascadeType.ALL, orphanRemoval = true)
     private WeatherGuid guid;
@@ -95,15 +95,10 @@ public class WeatherItem {
 
     public String getDescription() {
         return description;
-//        String str = "";
-//        this.description.toString(str);
-//        return str;
     }
 
     public void setDescription(String description) {
         this.description = description;
-//        this.description = new TextType();
-//        this.description.fromString(description);
     }
 
     public WeatherGuid getGuid() {
